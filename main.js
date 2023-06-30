@@ -1,45 +1,42 @@
 'use strict'
 
-let isUserHeightValide = false;
+const space = ' ';
+const star = '* ';
+const grid = '# ';
 
+let isRuning = true;
 
-while(!isUserHeightValide){
-  var userHeight = prompt("Hey, my dear, enter ur height in meters");
+while (isRuning) {
+  const pyramidType = prompt("Would u like to make Dima`s pyramid or another one? \n" + "y)Dima`s;    n)Another;");
 
-    if(userHeight.indexOf('.') >= 0){
-      isUserHeightValide = true;
-      break;
-    }
-    else if(userHeight.indexOf(',') >= 0){
-      isUserHeightValide = true;
-
-      userHeight = userHeight.replace(',', '.')
-    }
+  if(pyramidType.toLowerCase() === "y") {
+    dimaPyramid();
+    isRuning = false;
+  }else if(pyramidType.toLowerCase() === "n") {
+    anotherPyramid();
+    isRuning = false;
+  }
 }
 
-userHeight = parseFloat(userHeight);
-const userWeight = parseInt(prompt("Sunshine, enter ur weight"));
+function dimaPyramid() {
+  const counterFloorPyramid = parseInt(prompt("Which length should be?"));
+  for (let i = counterFloorPyramid, j = 1; i > 0, j < counterFloorPyramid + 1; i--, j++) {
+    let resultSpace = space.repeat(i);
+    let resultStar = star.repeat(j);
+    console.log(resultSpace + resultStar);
+  }
+}
 
-var imtResult = userWeight/Math.pow(userHeight, 2);
-imtResult = imtResult.toFixed(1);
+function anotherPyramid() {
+  const counterEvenPyramid = parseInt(prompt("Which length even should be?"));
+  const counterOddPyramid = parseInt(prompt("Which length odd should be?"));
+  const counterHeightPyramid = parseInt(prompt("Which height should be?"));
 
-console.log("Ur IMT num " + imtResult);
+  for(let i = 1; i < counterHeightPyramid + 1; i++){
+    let resultEven = grid.repeat(counterEvenPyramid);
+    let resultOdd = grid.repeat(counterOddPyramid);
 
-if (imtResult > 16 && imtResult < 18.5){
-  alert("Underweight")
-}
-else if(imtResult > 18.5 && imtResult < 25){
-  alert("That`s normal")
-}
-else if(imtResult > 25 && imtResult < 30){
-  alert("Overweight")
-}
-else if(imtResult > 30 && imtResult < 35){
-  alert("Obesity 1st degree")
-}
-else if(imtResult > 35 && imtResult < 40){
-  alert("Obesity 2st degree")
-}
-else if(imtResult > 40){
-  alert("Obesity 3st degree")
+    if(i % 2 === 0) console.log(resultEven);
+    else console.log(space + resultOdd);
+  }
 }
